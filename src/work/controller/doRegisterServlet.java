@@ -28,25 +28,32 @@ public class doRegisterServlet extends HttpServlet {
         String tele = req.getParameter("tele");
 
 //       String names =req.(process.getProductName());
+        if (uname!=""){      //逻辑为 所有的前提再账号不为空的情况下进行
         User user = service.getOne(uname);
-        if (user == null) {
-            if (upw.equals(upwd)) {
-                User u = new User();
-                u.setUsername(uname);
-                u.setPassword(upw);
-                u.setTele(tele);
-                service.insert(u);
-                resp.getWriter().write("1");
+        if (user==null){
+            resp.getWriter().write("4");
+            if (upw!=""&&upw!="") {               //逻辑 内嵌套  两密码都不等于空
+                if (upw.equals(upwd)){              //密码相等
+                    resp.getWriter().write("3");   //密码正确时  "3"
 
-        }else {
-                resp.getWriter().write("3");
-            }
-            }else{
-                resp.getWriter().write("2");
-            }
+                }else {
+                    resp.getWriter().write("2");   // 不正确时  "2"
+                }
+                }
+        }else{
+            resp.getWriter().write("1");  //数据库有账号
+        }
 
         }
     }
+}
+//                User u = new User();
+//                u.setUsername(uname);
+//                u.setPassword(upw);
+//                u.setTele(tele);
+//                service.insert(u);
+
+
 
 
 //

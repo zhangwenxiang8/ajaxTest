@@ -5,11 +5,13 @@ import work.service.IUserService;
 import work.service.UserServicelmpl;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@WebServlet("/dologin")
 public class DologinServlet extends HttpServlet {
     /*
     登陆-- 表单提交
@@ -23,29 +25,36 @@ public class DologinServlet extends HttpServlet {
     * */
 
 
-
-
-
-
-
     private IUserService service = new UserServicelmpl();
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        String uname = req.getParameter("username");
+        String pwd = req.getParameter("pwd");
+        User user = service.getOne(uname);
+        if (uname != null) {
+            if (user.getPassword().equals(pwd)) {
+                resp.getWriter().write("1");   //登陆成功
 
-
-        String username= req.getParameter("username");
-        String password= req.getParameter("pwd");
-        System.out.println(username+"     "+password );
-       User u= service.getOne(username);
-       if (u==null){
-                resp.sendRedirect("register");
-       }else{
-           if (u.getPassword().equals(password)){
-               resp.sendRedirect("list");
-           }
-       }
-
+        } else{
+                resp.getWriter().write("3");  //密码不对,登陆不成功
+                }
+    }else {
+        resp.getWriter().write("2");  //账号为空
     }
 }
+}
+//
+//        String username= req.getParameter("username");
+//           String password= req.getParameter("pwd");
+//           System.out.println(username+"     "+password );
+//           User u= service.getOne(username);
+//           if (u==null){
+//               resp.sendRedirect("register");
+//           }else{
+//               if (u.getPassword().equals(password)){
+//                   resp.sendRedirect("list");
+//               }
+
+

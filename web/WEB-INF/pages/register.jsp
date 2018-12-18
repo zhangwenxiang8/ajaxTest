@@ -19,9 +19,9 @@
     <br>
     确认密码: <input type="password" name="pwds"  id="pwds" class="a" placeholder="6~18 数字和字母"><span id="pmes" ></span>
     <br>
-    手机: <<input type="text" name="tele" id="tele"  placeholder="手机号码">
+    手机: <<input type="text" name="tele" id="tele"  placeholder="手机号码" class="a">
     <br>
-    <input type="button" value="注册" disabled="disabled" id="btn">
+    <input type="button" value="注册" disabled="disabled" id="btn">  <%--disabled 按钮不生效 点击效果--%>
 </form>
 <script type="text/javascript" src="jquery/jquery-3.3.1.min.js"> </script>
 <script>
@@ -44,16 +44,39 @@
                     type:"get",
                     data:{"names":un,"p":p,"ps":ps,"tele":tele},
                     success:function (data) {         //回调函数,当事件触发时,会返回一个值
-                      // if (data=="1"){
-                      //     $("#btn").css({"disablea":true});
-                      // } else{
-                      //     $("#message").text("有错误消息")
-                      }
+                      if (data=="4"){
+                           $("#message").text("可以注册"); //密码正确时  "1" ,可以注册
+                        }
+                           if (data=="43"){
+                               $("#message").text("可以注册");
+                               $("#pmes").text("✓")
+                               $("#btn").attr("disabled",false);
+                           }
+                           if (data=="1"){
+                          $("#message").text("用户已存在")
+                           }
+                           if (data=="42"){
+                               $("#pmes").text("两次密码不一致")
+                           }
+
                     }
                 });
             });
 
+                $("#btn").click(function () {
+                   $.ajax({
+                       url:"doIt",
+                       type:"post",
+                       data:{"names":un,"p":p,"ps":ps,"tele":tele},
+                       success:function (data) {
+                            if (data>0){
+                                alert("注册成功");
+                                window.location.href="http://localhost:8080/web12.10/login";
 
+                            }
+                       }
+                   })
+                })
 
         })
 </script>

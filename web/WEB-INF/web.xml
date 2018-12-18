@@ -74,23 +74,23 @@
     </servlet-mapping>
 
 
-    <servlet>
-        <servlet-name>dologin</servlet-name>
-        <servlet-class>work.controller.DologinServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>dologin</servlet-name>
-        <url-pattern>/dologin</url-pattern>
-    </servlet-mapping>
+    <!--<servlet>-->
+        <!--<servlet-name>dologin</servlet-name>-->
+        <!--<servlet-class>work.controller.DologinServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>dologin</servlet-name>-->
+        <!--<url-pattern>/dologin</url-pattern>-->
+    <!--</servlet-mapping>-->
 
 
-    <servlet>
-        <servlet-name>list</servlet-name>
-        <servlet-class>work.controller.ListServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>list</servlet-name>
-        <url-pattern>/list</url-pattern>
-    </servlet-mapping>
+    <!--<servlet>-->
+        <!--<servlet-name>list</servlet-name>-->
+        <!--<servlet-class>work.controller.ListServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>list</servlet-name>-->
+        <!--<url-pattern>/list</url-pattern>-->
+    <!--</servlet-mapping>-->
 
 </web-app>
