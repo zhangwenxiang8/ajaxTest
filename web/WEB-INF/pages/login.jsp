@@ -11,33 +11,33 @@
     <title>Title</title>
 </head>
 <body>
-<form id="fm">
+<form id="fm" action="dologin" method="post">
     用户名:<input type="text" name="username" id="uname">
     <hr>
     密码: <input type="password" name="pwd"  id="pwd">
     <hr>
-    <input type="button" value="登陆" id="btn">
+    <input type="submit" value="登陆" id="btn">
     <%--点击按钮,通过a链接 跳转到  register.jsp注册页面--%>
 </form>
-<script type="text/javascript" src="jquery/jquery-3.3.1.min.js"> </script>
-<script type="text/javascript">
-    $(function () {
-        $("#btn").click(function () {
-           var fm =$("#fm").serialize();
-            $.ajax({
-                url:"dologin",
-                type:"post",
-                data:fm,
-                success:function (data) {
-                    if (data=="1"){
-                        alert("登陆成功")
-                        window.location.href="http://localhost:8080/web12.10/list";
-                    }
-                }
-            })
-        })
-    })
-</script>
+<%--<script type="text/javascript" src="jquery/jquery-3.3.1.min.js"> </script>--%>
+<%--<script type="text/javascript">--%>
+    <%--$(function () {--%>
+        <%--$("#btn").click(function () {--%>
+           <%--var fm =$("#fm").serialize();--%>
+            <%--$.ajax({--%>
+                <%--url:"dologin",--%>
+                <%--type:"post",--%>
+                <%--data:fm,--%>
+                <%--success:function (data) {--%>
+                    <%--if (data=="1"){--%>
+                        <%--alert("登陆成功")--%>
+                        <%--window.location.href="http://localhost:8080/web12.10/list";--%>
+                    <%--}--%>
+                <%--}--%>
+            <%--})--%>
+        <%--})--%>
+    <%--})--%>
+<%--</script>--%>
 
 </body>
 </html>

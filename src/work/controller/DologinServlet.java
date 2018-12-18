@@ -6,9 +6,7 @@ import work.service.UserServicelmpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
 
 @WebServlet("/dologin")
@@ -35,15 +33,21 @@ public class DologinServlet extends HttpServlet {
         User user = service.getOne(uname);
         if (uname != null) {
             if (user.getPassword().equals(pwd)) {
-                resp.getWriter().write("1");   //登陆成功
 
-        } else{
-                resp.getWriter().write("3");  //密码不对,登陆不成功
-                }
-    }else {
-        resp.getWriter().write("2");  //账号为空
+                /*长时间存储*/
+
+                Cookie coo = new Cookie("uname", uname);//设置Cookie 账号密码
+                Cookie co = new Cookie("pwd", pwd);
+                coo.setMaxAge(60 * 60 * 24 * 7);        //设置最大有效期
+                co.setMaxAge(60 * 60 * 24 * 7);
+                resp.addCookie(coo);//存储账号密码到cookie里,响应出去
+                resp.addCookie(co);
+                HttpSession session =req.getSession();
+                session.setAttribute("user",user); //将封装好的账号密码作为一个session对象(k,v值)
+                resp.sendRedirect("list");
+            }
+        }
     }
-}
 }
 //
 //        String username= req.getParameter("username");
